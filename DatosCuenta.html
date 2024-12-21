@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datos de Cuenta</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body class="datos-cuenta-body">
+  <div id="datos-cuenta-container">
+    <h2 id="datos-cuenta-title">Datos de Cuenta</h2>
+    <form id="datos-cuenta-form" onsubmit="return validarFormulario(event)">
+      <div class="form-group">
+        <label for="nombre" id="nombre-label">Nombre</label>
+        <input type="text" id="nombre" placeholder="Ingrese su nombre" required>
+      </div>
+      <div class="form-group">
+        <label for="primer-apellido" id="primer-apellido-label">Primer Apellido</label>
+        <input type="text" id="primer-apellido" placeholder="Ingrese su primer apellido" required>
+      </div>
+      <div class="form-group">
+        <label for="segundo-apellido" id="segundo-apellido-label">Segundo Apellido</label>
+        <input type="text" id="segundo-apellido" placeholder="Ingrese su segundo apellido" required>
+      </div>
+      <div class="form-group">
+        <label for="telefono" id="telefono-label">Teléfono</label>
+        <input type="tel" id="telefono" placeholder="Ingrese su teléfono" required>
+      </div>
+      <div class="form-group">
+        <label for="direccion" id="direccion-label">Dirección</label>
+        <input type="text" id="direccion" placeholder="Ingrese su dirección" required>
+      </div>
+      <div class="form-group">
+        <label for="nacionalidad" id="nacionalidad-label">Nacionalidad</label>
+        <input type="text" id="nacionalidad" placeholder="Ingrese su nacionalidad" required>
+      </div>
+      <div class="form-group">
+        <label for="sexo" id="sexo-label">Sexo</label>
+        <select id="sexo" required>
+          <option value="">Seleccione su sexo</option>
+          <option value="masculino">Masculino</option>
+          <option value="femenino">Femenino</option>
+        </select>
+      </div>
+      <button type="submit" id="guardar-btn">Guardar</button>
+    </form>
+    <button id="pagina-principal-btn" onclick="window.location.href='index.html'">Página Principal</button>
+  </div>
+
+  <div id="footer-DatosCuenta">
+    <p>Copyright &copy; 2025 - <a href="#">Revista de Psicologia</a> &middot; Todos los derechos reservados | Creado por: <a href="#">Ilisch Gabriel Miranda Torres</a></p>
+  </div>
+
+  <script>
+    function validarFormulario(event) {
+      event.preventDefault();
+      const nombre = document.getElementById('nombre').value;
+      const primerApellido = document.getElementById('primer-apellido').value;
+      const segundoApellido = document.getElementById('segundo-apellido').value;
+      const telefono = document.getElementById('telefono').value;
+      const direccion = document.getElementById('direccion').value;
+      const nacionalidad = document.getElementById('nacionalidad').value;
+      const sexo = document.getElementById('sexo').value;
+
+      // Validación de que todos los campos estén completos
+      if (!nombre || !primerApellido || !segundoApellido || !telefono || !direccion || !nacionalidad || !sexo) {
+        alert("Por favor complete todos los campos.");
+        return false;
+      }
+
+      // Si la validación es correcta, redirige a index.html
+      window.location.href = "index.html";
+      return true;
+    }
+  </script>
+</body>
+</html>

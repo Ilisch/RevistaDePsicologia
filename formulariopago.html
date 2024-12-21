@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Pago</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+  <div class="container mt-5" id="container-pago">
+    <div class="card p-4" id="card-pago">
+      <h4 class="mb-3" id="titulo-pago">Tarjeta de Débito/Crédito</h4>
+      <form id="form-pago">
+        <div class="mb-3">
+          <label for="cardNumber-pago" class="form-label">Número completo de la tarjeta</label>
+          <input type="text" class="form-control" id="cardNumber-pago" placeholder="0000 0000 0000 0000" maxlength="19" required>
+          <div class="invalid-feedback">El número de tarjeta debe tener 16 dígitos en bloques de 4.</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="expirationDate-pago" class="form-label">Fecha de expiración</label>
+            <input type="text" class="form-control" id="expirationDate-pago" placeholder="MM/YY" maxlength="5" required>
+            <div class="invalid-feedback">Ingresa una fecha válida en formato MM/YY.</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="cvv-pago" class="form-label">Código de seguridad</label>
+            <input type="text" class="form-control" id="cvv-pago" placeholder="000" maxlength="4" required>
+            <div class="invalid-feedback">El CVV debe tener 3 o 4 dígitos.</div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="cardHolderName-pago" class="form-label">Nombre del tarjetahabiente</label>
+          <input type="text" class="form-control" id="cardHolderName-pago" placeholder="Como aparece en la tarjeta" required>
+          <div class="invalid-feedback">Este campo es obligatorio.</div>
+        </div>
+        <div class="mb-3">
+          <label for="email-pago" class="form-label">Correo electrónico</label>
+          <input type="email" class="form-control" id="email-pago" placeholder="Para enviarte el recibo de pago" required>
+          <div class="invalid-feedback">Ingresa un correo electrónico válido.</div>
+        </div>
+        <div class="text-center">
+          <button type="button" class="btn btn-secondary me-2" id="btn-cancelar-pago">CANCELAR</button>
+          <button type="submit" class="btn btn-primary" id="btn-continuar-pago">CONTINUAR</button>
+        </div>
+        <p class="text-muted mt-3 text-center" id="terminos-pago">
+          Al presionar CONTINUAR estás aceptando los <a href="#">términos y condiciones</a>.
+        </p>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.getElementById('form-pago').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      let isValid = true;
+
+      // Validación número de tarjeta
+      const cardNumber = document.getElementById('cardNumber-pago');
+      const cardNumberPattern = /^\d{4}\s\d{4}\s\d{4}\s\d{4}$/;
+      if (!cardNumberPattern.test(cardNumber.value)) {
+        cardNumber.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        cardNumber.classList.remove('is-invalid');
+      }
+
+      // Validación fecha de expiración
+      const expirationDate = document.getElementById('expirationDate-pago');
+      const expirationDatePattern = /^(0[1-9]|1[0-2])\/\d{2}$/;
+      if (!expirationDatePattern.test(expirationDate.value)) {
+        expirationDate.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        expirationDate.classList.remove('is-invalid');
+      }
+
+      // Validación CVV
+      const cvv = document.getElementById('cvv-pago');
+      const cvvPattern = /^\d{3,4}$/;
+      if (!cvvPattern.test(cvv.value)) {
+        cvv.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        cvv.classList.remove('is-invalid');
+      }
+
+      // Validación correo electrónico
+      const email = document.getElementById('email-pago');
+      if (!email.validity.valid) {
+        email.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        email.classList.remove('is-invalid');
+      }
+
+      if (isValid) {
+        // Redirigir a index.html si el formulario es válido
+        window.location.href = 'index.html';
+      }
+    });
+
+    // Redirigir a index.html al hacer clic en el botón CANCELAR
+    document.getElementById('btn-cancelar-pago').addEventListener('click', function () {
+      window.location.href = 'index.html';
+    });
+  </script>
+  <div id="footer">
+    <p>Copyright &copy; 2025 - <a href="#">Revista de Psicologia</a> &middot; Todos los rederechos reservados | Creado por: <a href="#">Ilisch Gabriel Miranda Torres</a> | 
+  </div>
+</body>
+</html>
